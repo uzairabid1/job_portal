@@ -23,11 +23,11 @@
 
     <!-- Custom styles for this template -->
     <link href="css/admin_login.css" rel="stylesheet">
-    <script src="js/admin_login.js"></script>
+    <!-- <script src="js/admin_login.js"></script> -->
   </head>
 
   <body class="text-center">
-    <form class="form-signin" id="admin_login" name="admin_login">
+    <form class="form-signin" method="POST" action="admin_login.php" id="admin_login" name="admin_login">
       <img class="mb-4" src="img/logo.png" alt="" width="100" height="100">
       <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
       <label for="email" class="sr-only">Email address</label>
@@ -40,3 +40,24 @@
     </form>
   </body>
 </html>
+
+<?php
+include('connection/db.php');
+
+if(isset($_POST['submit'])){
+ $email = $_POST['email'];
+ $pass = $_POST['pass'];
+ $query = mysqli_query($conn,"select * from admin_login where admin_email = '$email' and admin_pass = '$pass'");
+
+ if(mysqli_num_rows($query)>0){
+   header('location:admin_dashboard.php');
+ }
+ else{
+   echo "<script>alert('Please try again')</script>";
+ }
+
+}
+
+
+
+?>
