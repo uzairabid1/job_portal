@@ -1,14 +1,12 @@
 <?php
 session_start();
-if($_SESSION['email']==true){
-
+if ($_SESSION['email']==true) {
+ 
 }
 else{
   header('location:admin_login.php');
 }
 ?>
-
-
 <!doctype html>
 <html lang="en">
   <head>

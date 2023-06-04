@@ -127,65 +127,55 @@ else{
         <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="admin_dashboard.php">Dashboard</a></li>
-    <li class="breadcrumb-item"><a href="#">Customers</a></li>
+    <li class="breadcrumb-item"><a href="customers.php">Customers</a></li>
+    <li class="breadcrumb-item"><a href="#">Add Customer</a></li>
   
   </ol>
 </nav>
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-          <h1 class="h2">customers</h1>
+          <h1 class="h2">Add customer</h1>
             <div class="btn-toolbar mb-2 mb-md-0">
               <div class="btn-group mr-2">
                
               </div>
-              <a class="btn btn-primary" href="add_customer.php">Add Customer</a>
+              <!-- <a class="btn btn-primary" href="add_customer.php">Add Customer</a> -->
             </div>
           </div>
-          <table id="example" class="display" style="width:100%">
-        <thead>
-            <tr>
-                <th>#SL</th>
-                <th>Email</th>
-                <th>Username</th>
-                <th>First name</th>
-                <th>Last name</th>
-                <th>Admin Type</th>
-            </tr>
-        </thead>
-        <tbody>
-<?php
-include('connection/db.php');
-
-$query=mysqli_query($conn,"select * from admin_login");
-while($row=mysqli_fetch_array($query)){
-
-
-
-?>
-            <tr>
-                <td><?php echo $row['id'];?></td>
-                <td><?php echo $row['admin_email'];?></td>
-                <td><?php echo $row['admin_username'];?></td>
-                <td><?php echo $row['First_name'];?></td>
-                <td><?php echo $row['Last_name'];?></td>
-                <td><?php echo $row['admin_type'];?></td>
-               
-               
-            </tr>
-            <?php } ?>
-        </tbody>
-        <tfoot>
-            <tr>
-            <th>#SL</th>
-                
-            <th>Email</th>
-                <th>Username</th>
-                <th>First name</th>
-                <th>Last name</th>
-                <th>Admin Type</th>
-                
-            </tr>
-        </tfoot>
-    </table>
+          <div style="width:60%; margin-left:20%; background-color: #E5E8E8;">
+            <form action="" style="margin:3%; padding:3%;">
+                <div class="form-group">
+                    <label for="Customer Email">Enter Email</label>
+                    <input type="email" class="form-control" placeholder="Enter Customer Email">
+                </div>
+                <div class="form-group">
+                    <label for="Customer Username">Enter Username</label>
+                    <input type="text" class="form-control" placeholder="Enter Customer Username">
+                </div>
+                <div class="form-group">
+                    <label for="Customer Username">Enter Password</label>
+                    <input type="password" class="form-control" placeholder="Enter Customer Password">
+                </div>
+                <div class="form-group">
+                    <label for="First name">Enter First name</label>
+                    <input type="text" class="form-control" placeholder="Enter First Name">
+                </div>
+                <div class="form-group">
+                    <label for="Last name">Enter Last name</label>
+                    <input type="text" class="form-control" placeholder="Enter Last Name">
+                </div>
+                <div class="form-group">
+                    <label for="Admin Type">Admin Type</label>
+                    <select name="admin_type"class="form-control" id="admin_type">
+                        <option value="1">Super Admin</option>
+                        <option value="2">Customer Admin</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                   
+                    <input type="submit" class="btn btn-block btn-success" placeholder="Save" name="submit" id="submit">
+                </div>
+            </form>
+          </div>
 
           <canvas class="my-4" id="myChart" width="900" height="380"></canvas>
 
