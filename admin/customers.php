@@ -33,6 +33,7 @@
                 <th>First name</th>
                 <th>Last name</th>
                 <th>Admin Type</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -49,9 +50,20 @@ while($row=mysqli_fetch_array($query)){
                 <td><?php echo $row['id'];?></td>
                 <td><?php echo $row['admin_email'];?></td>
                 <td><?php echo $row['admin_username'];?></td>
-                <td><?php echo $row['first_name'];?></td>
-                <td><?php echo $row['last_name'];?></td>
+                <td><?php echo $row['First_name'];?></td>
+                <td><?php echo $row['Last_name'];?></td>
                 <td><?php echo $row['admin_type'];?></td>
+                <td>
+                  <div class="row">
+                  <div class="btn-group">
+                    <a href="customer_edit.php?edit=<?php echo $row['id']; ?>" class="btn btn-success"><span class="glyphicon glyphicon-pencil
+"></span></a>
+                    <a href="customer_delete.php?del=<?php echo $row['id']; ?>" class="btn btn-danger"><span class="glyphicon glyphicon-trash
+"></span></a>
+
+                  </div>
+                  </div>
+                </td>
                
                
             </tr>
@@ -66,6 +78,7 @@ while($row=mysqli_fetch_array($query)){
                 <th>First name</th>
                 <th>Last name</th>
                 <th>Admin Type</th>
+                <th>Action</th>
                 
             </tr>
         </tfoot>
