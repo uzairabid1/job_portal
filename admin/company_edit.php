@@ -3,14 +3,10 @@ include('connection/db.php');
 include('include/header.php');
 include('include/sidebar.php');
 $id=$_GET['edit'];
-$query=mysqli_query($conn,"select * from admin_login where id ='$id'");
+$query=mysqli_query($conn,"select * from company where company_id ='$id'");
 while ($row=mysqli_fetch_array($query)) {
-   $email=$row['admin_email'];
-   $first_name=$row['first_name'];
-   $last_name=$row['last_name'];
-   $admin_pass=$row['admin_pass'];
-   $admin_username=$row['admin_username'];
-   $admin_type=$row['admin_type'];
+   $company_name=$row['company'];
+   $des=$row['des'];
 }
 
 ?>
@@ -18,13 +14,13 @@ while ($row=mysqli_fetch_array($query)) {
         <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="admin_dashboard.php">Dashboard</a></li>
-    <li class="breadcrumb-item"><a href="customers.php">Customers</a></li>
-    <li class="breadcrumb-item"><a href="#">Update Customer</a></li>
+    <li class="breadcrumb-item"><a href="create_company.php">Company</a></li>
+    <li class="breadcrumb-item"><a href="#">Update Company</a></li>
   
   </ol>
 </nav>
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-          <h1 class="h2">Update customer</h1>
+          <h1 class="h2">Update Company</h1>
             <div class="btn-toolbar mb-2 mb-md-0">
               <div class="btn-group mr-2">
                
@@ -38,32 +34,13 @@ while ($row=mysqli_fetch_array($query)) {
             <form action="" method="post" style="margin:3%; padding:3%;" name="customer_form" id ="customer_form">
               <div id="msg"></div> 
                 <div class="form-group">
-                    <label for="Customer Email">Enter Email</label>
-                    <input type="email" name="email" id="email" value="<?php echo $email;?>"class="form-control" placeholder="Enter Customer Email">
+                    <label for="Customer Email">Enter Company Name</label>
+                    <input type="text" name="Company" id="Company" value="<?php echo $company_name;?>"class="form-control" placeholder="Enter Company Name">
                 </div>
                 <div class="form-group">
-                    <label for="Customer Username">Enter Username</label>
-                    <input type="text" name="username" id="username" value="<?php echo $admin_username;?>" class="form-control" placeholder="Enter Customer Username">
-                </div>
-                <div class="form-group">
-                    <label for="Customer Username">Enter Password</label>
-                    <input type="text" name="password" id="password" class="form-control" value="<?php echo $admin_pass;?>" placeholder="Enter Customer Password">
-                </div>
-                <div class="form-group">
-                    <label for="First name">Enter First name</label>
-                    <input type="text" name="first_name" id="first_name" value="<?php echo $first_name;?>" class="form-control" placeholder="Enter First Name">
-                </div>
-                <div class="form-group">
-                    <label for="Last name">Enter Last name</label>
-                    <input type="text" name="last_name" id="last_name" value="<?php echo $last_name;?>" class="form-control" placeholder="Enter Last Name">
-                </div>
-                <div class="form-group">
-                    <label for="Admin Type">Admin Type</label>
-                    <select name="admin_type" name="admin_type" value="<?php echo $admin_type;?>" class="form-control" id="admin_type">
-                        <option value="1">Super Admin</option>
-                        <option value="2">Customer Admin</option>
-                    </select>
-                </div>
+                    <label for="Customer Username">Enter Description</label>
+                    <textarea name="des" id="des" class='form-control' cols="30" rows="10"><?php echo $des; ?></textarea>
+                </div>  
                 <input type="hidden" name="id" id="id" value=" <?php echo $_GET['edit']; ?>">
                 <div class="form-group">
                    
@@ -112,14 +89,11 @@ while ($row=mysqli_fetch_array($query)) {
 include('connection/db.php');
 if(isset($_POST['submit'])){
     $id=$_POST['id'];
-    $email=$_POST['email'];
-    $username=$_POST['username'];
-    $password=$_POST['password'];
-    $password = rtrim($password," ");
-    $first_name=$_POST['first_name'];
-    $last_name=$_POST['last_name'];
-    $admin_type=$_POST['admin_type'];
-    $query1=mysqli_query($conn,"update admin_login set admin_email='$email',admin_username='$username',admin_pass='$password',first_name='$first_name',last_name='$last_name',admin_type='$admin_type' where id='$id'");
+    $company=$_POST['Company'];
+    $des = $_POST['des'];
+    $des = rtrim($des," ");
+    $des = ltrim($des," ");
+    $query1=mysqli_query($conn,"update company set company='$company',des='$des' where company_id='$id'");
     if($query1){
         echo "<script> alert('Record has been successfully Updated!!!')</script>";
     }

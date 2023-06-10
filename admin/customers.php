@@ -50,8 +50,8 @@ while($row=mysqli_fetch_array($query)){
                 <td><?php echo $row['id'];?></td>
                 <td><?php echo $row['admin_email'];?></td>
                 <td><?php echo $row['admin_username'];?></td>
-                <td><?php echo $row['First_name'];?></td>
-                <td><?php echo $row['Last_name'];?></td>
+                <td><?php echo $row['first_name'];?></td>
+                <td><?php echo $row['last_name'];?></td>
                 <td><?php echo $row['admin_type'];?></td>
                 <td>
                   <div class="row">

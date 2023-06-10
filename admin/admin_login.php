@@ -48,7 +48,7 @@ if (isset($_POST['submit'])) {
 $email=$_POST['email'];
 $pass=$_POST['pass'];
 
-$query= mysqli_query($conn,"select * from admin_login where admin_email='$email' and admin_password='$pass'");
+$query= mysqli_query($conn,"select * from admin_login where admin_email='$email' and admin_pass='$pass'");
 if($query){
   if (mysqli_num_rows($query)>0) {
 $_SESSION['email']=$email;

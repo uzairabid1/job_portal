@@ -1,57 +1,46 @@
 <?php
-include('connection/db.php');
-include('include/header.php');
-include('include/sidebar.php');
-
+  include('include/header.php');
+  include('include/sidebar.php');
 ?>
-
   <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
         <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="admin_dashboard.php">Dashboard</a></li>
-    <li class="breadcrumb-item"><a href="#">Jobs</a></li>    
+    <li class="breadcrumb-item"><a href="#">Company</a></li>    
 
   </ol>
 </nav>
 
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-          <h1 class="h2">All Jobs</h1>
+          <h1 class="h2">Company</h1>
             <div class="btn-toolbar mb-2 mb-md-0">
               <div class="btn-group mr-2">
                
               </div>
-              <a class="btn btn-primary" href="add_company.php">Create Job</a>
+              <a class="btn btn-primary" href="add_company.php">Add Company</a>
             </div>
           </div>
           <table id="example" class="display" style="width:100%">
         <thead>
             <tr>
                 <th>#SL</th>
-                <th>Admin Name</th>
-                <th>Job Title</th>
+                <th>Company Name</th>
                 <th>Description</th>
-                <th>Country</th>
-                <th>State</th>
-                <th>City</th>
-                <th>Actions</th>  
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
 <?php
 include('connection/db.php');
 
-$query=mysqli_query($conn,"select * from all_jobs where customer_email='{$_SESSION['email']}'");
+$query=mysqli_query($conn,"select * from company");
 while($row=mysqli_fetch_array($query)){
 
 ?>
             <tr>
-                <td><?php echo $row['job_id'];?></td>
-                <td><?php echo $row['customer_email'];?></td>
-                <td><?php echo $row['job_title'];?></td>
+                <td><?php echo $row['company_id'];?></td>
+                <td><?php echo $row['company'];?></td>
                 <td><?php echo $row['des'];?></td>
-                <td><?php echo $row['country'];?></td>
-                <td><?php echo $row['state'];?></td>
-                <td><?php echo $row['city'];?></td>
                 <td>
                   <div class="row">
                   <div class="btn-group">
@@ -70,14 +59,10 @@ while($row=mysqli_fetch_array($query)){
         </tbody>
         <tfoot>
             <tr>
-            <th>#SL</th>
-                <th>Admin Name</th>
-                <th>Job Title</th>
-                <th>Description</th>
-                <th>Country</th>
-                <th>State</th>
-                <th>City</th>     
-                <th>Actions</th>       
+            <th>#SL</th>                
+            <th>Company Name</th>
+            <th>Description</th>         
+            <th>Actions</th>       
             </tr>
         </tfoot>
     </table>
