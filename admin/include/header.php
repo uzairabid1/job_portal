@@ -36,7 +36,12 @@ else{
     
 <!-- Bootstrap Icon Cdn -->
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
-  </head>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  
+ 
+</head>
 
   <body>
   <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">

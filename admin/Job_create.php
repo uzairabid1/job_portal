@@ -20,7 +20,7 @@ include('include/sidebar.php');
               <div class="btn-group mr-2">
                
               </div>
-              <a class="btn btn-primary" href="add_company.php">Create Job</a>
+              <a class="btn btn-primary" href="add_create_job.php">Create Job</a>
             </div>
           </div>
           <table id="example" class="display" style="width:100%">
@@ -55,9 +55,9 @@ while($row=mysqli_fetch_array($query)){
                 <td>
                   <div class="row">
                   <div class="btn-group">
-                    <a href="company_edit.php?edit=<?php echo $row['company_id']; ?>" class="btn btn-success"><span class="glyphicon glyphicon-pencil
+                    <a href="job_edit.php?edit=<?php echo $row['job_id']; ?>" class="btn btn-success"><span class="glyphicon glyphicon-pencil
 "></span></a>
-                    <a href="company_delete.php?del=<?php echo $row['company_id']; ?>" class="btn btn-danger"><span class="glyphicon glyphicon-trash
+                    <a href="job_delete.php?del=<?php echo $row['job_id']; ?>" class="btn btn-danger"><span class="glyphicon glyphicon-trash
 "></span></a>
 
                   </div>
