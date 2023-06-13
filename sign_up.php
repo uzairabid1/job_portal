@@ -68,6 +68,5 @@ if (isset($_POST['submit'])) {
     } else {
         echo "<script>alert('Opps! Something went wrong')</script>";
     }
-
 }
 ?>
