@@ -5,28 +5,27 @@
   <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
         <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="admin_dashboard.php">Dashboard</a></li>
-    <li class="breadcrumb-item"><a href="#">Company</a></li>    
+    <li class="breadcrumb-item"><a href="add_category.php">Dashboard</a></li>
+    <li class="breadcrumb-item"><a href="#">Category</a></li>    
 
   </ol>
 </nav>
 
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-          <h1 class="h2">Company</h1>
+          <h1 class="h2">Category</h1>
             <div class="btn-toolbar mb-2 mb-md-0">
               <div class="btn-group mr-2">
                
               </div>
-              <a class="btn btn-primary" href="add_company.php">Add Company</a>
+              <a class="btn btn-primary" href="add_category.php">Add Category</a>
             </div>
           </div>
           <table id="example" class="display" style="width:100%">
         <thead>
             <tr>
                 <th>#SL</th>
-                <th>Company Name</th>
+                <th>Category Name</th>
                 <th>Description</th>
-                <th>Admin</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -34,21 +33,20 @@
 <?php
 include('connection/db.php');
 
-$query=mysqli_query($conn,"select * from company");
+$query=mysqli_query($conn,"select * from job_category");
 while($row=mysqli_fetch_array($query)){
 
 ?>
             <tr>
-                <td><?php echo $row['company_id'];?></td>
-                <td><?php echo $row['company'];?></td>
+                <td><?php echo $row['id'];?></td>
+                <td><?php echo $row['category'];?></td>
                 <td><?php echo $row['des'];?></td>
-                <td><?php echo $row['admin'];?></td>
                 <td>
                   <div class="row">
                   <div class="btn-group">
-                    <a href="company_edit.php?edit=<?php echo $row['company_id']; ?>" class="btn btn-success"><span class="glyphicon glyphicon-pencil
+                    <a href="edit_category.php?edit=<?php echo $row['id']; ?>" class="btn btn-success"><span class="glyphicon glyphicon-pencil
 "></span></a>
-                    <a href="company_delete.php?del=<?php echo $row['company_id']; ?>" class="btn btn-danger"><span class="glyphicon glyphicon-trash
+                    <a href="category_delete.php?del=<?php echo $row['id']; ?>" class="btn btn-danger"><span class="glyphicon glyphicon-trash
 "></span></a>
 
                   </div>
@@ -62,9 +60,8 @@ while($row=mysqli_fetch_array($query)){
         <tfoot>
             <tr>
             <th>#SL</th>                
-            <th>Company Name</th>
+            <th>Category Name</th>
             <th>Description</th>         
-            <th>Admin</th>         
             <th>Actions</th>       
             </tr>
         </tfoot>

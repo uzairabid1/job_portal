@@ -33,6 +33,8 @@ include('include/sidebar.php');
                 <th>Country</th>
                 <th>State</th>
                 <th>City</th>
+                <th>Category</th>
+                <th>Keyword</th>
                 <th>Actions</th>  
             </tr>
         </thead>
@@ -52,6 +54,8 @@ while($row=mysqli_fetch_array($query)){
                 <td><?php echo $row['country'];?></td>
                 <td><?php echo $row['state'];?></td>
                 <td><?php echo $row['city'];?></td>
+                <td><?php echo $row['category'];?></td>
+                <td><?php echo $row['keyword'];?></td>
                 <td>
                   <div class="row">
                   <div class="btn-group">
@@ -77,6 +81,8 @@ while($row=mysqli_fetch_array($query)){
                 <th>Country</th>
                 <th>State</th>
                 <th>City</th>     
+                <th>Category</th>
+                <th>Keyword</th>
                 <th>Actions</th>       
             </tr>
         </tfoot>

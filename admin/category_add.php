@@ -1,13 +1,12 @@
 <?php
 include('connection/db.php');
-$Company=$_POST['Company'];
+$category=$_POST['category'];
 $Description=$_POST['Description'];
-$admin=$_POST['admin'];
 $Description = rtrim($Description," ");
 $Description = ltrim($Description," ");
 
 
-$query = mysqli_query($conn,"insert into company(company,des,admin)values('$Company','$Description','$admin')");
+$query = mysqli_query($conn,"insert into job_category(category,des)values('$category','$Description')");
 
 if($query){
     echo "Data has been successfully inserted";

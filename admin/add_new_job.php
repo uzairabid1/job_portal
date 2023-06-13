@@ -11,10 +11,11 @@ $Description = rtrim($Description," ");
 $Description = ltrim($Description," ");
 $job_title= ltrim($job_title," ");
 $job_title= rtrim($job_title," ");
+$category = $_POST['category'];
+$Keyword = $_POST['Keyword'];
 
 
-
-$query = mysqli_query($conn,"insert into all_jobs(customer_email,job_title,des,country,state,city)values('$login','$job_title','$Description','$country','$state','$city')");
+$query = mysqli_query($conn,"insert into all_jobs(customer_email,job_title,des,country,state,city,keyword,category)values('$login','$job_title','$Description','$country','$state','$city','$Keyword','$category')");
 
 if($query){
     echo "Data has been successfully inserted";

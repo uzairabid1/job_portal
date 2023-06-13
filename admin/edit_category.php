@@ -3,11 +3,10 @@ include('connection/db.php');
 include('include/header.php');
 include('include/sidebar.php');
 $id=$_GET['edit'];
-$query=mysqli_query($conn,"select * from company where company_id ='$id'");
+$query=mysqli_query($conn,"select * from job_category where id ='$id'");
 while ($row=mysqli_fetch_array($query)) {
-   $company_name=$row['company'];
+   $category=$row['category'];
    $des=$row['des'];
-   $admin=$row['admin'];
 }
 
 ?>
@@ -35,27 +34,13 @@ while ($row=mysqli_fetch_array($query)) {
             <form action="" method="post" style="margin:3%; padding:3%;" name="customer_form" id ="customer_form">
               <div id="msg"></div> 
                 <div class="form-group">
-                    <label for="Customer Email">Enter Company Name</label>
-                    <input type="text" name="Company" id="Company" value="<?php echo $company_name;?>"class="form-control" placeholder="Enter Company Name">
+                    <label for="Customer Email">Enter Category Name</label>
+                    <input type="text" name="category" id="category" value="<?php echo $category;?>"class="form-control" placeholder="Enter Company Name">
                 </div>
                 <div class="form-group">
                     <label for="Customer Username">Enter Description</label>
                     <textarea name="des" id="des" class='form-control' cols="30" rows="10"><?php echo $des; ?></textarea>
-                </div> 
-
-                <div class="form-group">
-                  <label for="Customer Username">Select Company Admin</label>
-                  <select name="admin" class="form-control" id="admin">
-                    <?php
-                      include('connection/db.php');
-                      $sql=mysqli_query($conn,"select * from admin_login where admin_type='2'");
-                      while ($row=mysqli_fetch_array($sql)) { ?>
-                        <option value="<?php echo $row['admin_email']; ?>"><?php echo $row['admin_email']; ?> </option>
-                    <?php } ?>
-                  </select>
-                </div> 
-
-
+                </div>  
                 <input type="hidden" name="id" id="id" value=" <?php echo $_GET['edit']; ?>">
                 <div class="form-group">
                    
@@ -104,12 +89,11 @@ while ($row=mysqli_fetch_array($query)) {
 include('connection/db.php');
 if(isset($_POST['submit'])){
     $id=$_POST['id'];
-    $company=$_POST['Company'];
+    $category=$_POST['category'];
     $des = $_POST['des'];
-    $admin = $_POST['admin'];
     $des = rtrim($des," ");
     $des = ltrim($des," ");
-    $query1=mysqli_query($conn,"update company set company='$company',des='$des',admin='$admin' where company_id='$id'");
+    $query1=mysqli_query($conn,"update job_category set category='$category',des='$des' where id='$id'");
     if($query1){
         echo "<script> alert('Record has been successfully Updated!!!')</script>";
     }

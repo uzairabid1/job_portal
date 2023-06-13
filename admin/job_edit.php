@@ -6,12 +6,15 @@
 include('connection/db.php');
 $edit=$_GET['edit'];
 $query=mysqli_query($conn,"select * from all_jobs where job_id='$edit'");
+$query2=mysqli_query($conn,"select * from job_category");
 while($row=mysqli_fetch_array($query)){
 $title=$row['job_title'];
 $des=$row['des'];
 $country=$row['country'];
 $state=$row['state'];
 $city=$row['city'];
+$category = $row['category'];
+$keyword = $row['keyword'];
 }
 
 
@@ -51,24 +54,46 @@ $city=$row['city'];
                 <input type="hidden" name="id" id="id" value="<?php  echo $_GET['edit'];?>">
                 <div class="form-group">
   <label for="countryId">Country</label>
-  <select name="country" class="countries form-control" value=<?php echo $country;?> id="countryId">
-    <option value="">Select Country</option>
+  <select name="country" class="countries form-control" value='' id="countryId">
+    <option value=""><?php echo $country;?></option>
   </select>
 </div>
 
 <div class="form-group">
   <label for="stateId">State</label>
-  <select name="state" class="states form-control" value=<?php echo $state;?> id="stateId">
-    <option value="">Select State</option>
+  <select name="state" class="states form-control" value='' id="stateId">
+    <option value=""><?php echo $state;?></option>
   </select>
 </div>
 
 <div class="form-group">
   <label for="cityId">City</label>
-  <select name="city" class="cities form-control" value=<?php echo $city;?> id="cityId">
-    <option value="">Select City</option>
+  <select name="city" class="cities form-control" value='' id="cityId">
+    <option value=""><?php echo $city;?></option>
   </select>
 </div>
+
+<div class="form-group">
+                    <label for="Job title">Keyword</label>
+                    <input type="text" value="<?php echo $keyword; ?>" name="keyword" id="keyword" class="form-control" placeholder="Enter Keyword">
+                </div>
+
+<div class="form-group">
+  <label for="cityId">Category</label>
+  <select name="city" class="form-control" value='<?php echo $category;?>' id="categoryId">
+  <option hidden ><?php echo $category;?></option>
+  <?php
+      while($row=mysqli_fetch_array($query2)){
+      ?>
+        <option value="<?php echo $row['id'];?>"><?php echo $row['id']?></option>
+      
+      <?php
+      }
+     ?>
+  </select>
+</div>
+
+
                 <div class="form-group">                   
                     <input type="submit" class="btn btn-block btn-success" placeholder="Save" name="submit" id="submit">
                 </div>
