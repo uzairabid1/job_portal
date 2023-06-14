@@ -1,3 +1,13 @@
+<?php
+session_start();
+if (isset($_SESSION['email'])==true) {
+
+}else{
+  echo "<script>alert('You need to login')</script>";
+ header('location:job-post.php');
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -37,18 +47,46 @@
 
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav ml-auto">
-	          <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
-	          <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-	          <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-	          <li class="nav-item active"><a href="contact.html" class="nav-link">Contact</a></li>
-	          <li class="nav-item cta mr-md-2"><a href="new-post.html" class="nav-link">Post a Job</a></li>
-	          <li class="nav-item cta cta-colored"><a href="job-post.html" class="nav-link">Want a Job</a></li>
+	          <li class="nav-item"><a href="index.php" class="nav-link">Home</a></li>
+	          <li class="nav-item"><a href="about.php" class="nav-link">About</a></li>
+	          <li class="nav-item"><a href="blog.php" class="nav-link">Blog</a></li>
+	          <li class="nav-item active"><a href="contact.php" class="nav-link">Contact</a></li>
+	          <?php
+            if(isset($_SESSION['email'])==true){?>
+              <li class="nav-item cta mr-md-2"><a href="job-post.php" class="nav-link"><?php echo $_SESSION['email']; ?></a></li>
+              <li class="nav-item cta cta-colored"><a href="logout.php" class="nav-link">logout</a></li>
+              <?php
+            }else{
+              ?>
+              <li class="nav-item cta mr-md-2"><a href="job-post.php" class="nav-link">Login</a></li>
+	          
+
+
+             <?php
+            }
+
+            ?>
 
 	        </ul>
 	      </div>
 	    </div>
 	  </nav>
     <!-- END nav -->
+    <?php
+include('connection/db.php');
+$id=$_GET['id'];
+
+$query=mysqli_query($conn,"select * from all_jobs where job_id='$id'");
+while($row=mysqli_fetch_array($query)){
+$title=$row['job_title'];
+$des=$row['des'];
+$country=$row['country'];
+$state=$row['state'];
+$city=$row['city'];
+}
+
+
+?>
     
     <div class="hero-wrap js-fullheight" style="background-image: url('images/bg_2.jpg');" data-stellar-background-ratio="0.5">
       <div class="overlay"></div>
@@ -66,40 +104,44 @@
       <div class="container">
         <div class="row">
           <div class="col-md-8 ftco-animate">
-            <h2 class="mb-3">It is a long established fact a reader be distracted</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis, eius mollitia suscipit, quisquam doloremque distinctio perferendis et doloribus unde architecto optio laboriosam porro adipisci sapiente officiis nemo accusamus ad praesentium? Esse minima nisi et. Dolore perferendis, enim praesentium omnis, iste doloremque quia officia optio deserunt molestiae voluptates soluta architecto tempora.</p>
-            <p>
-              <img src="images/image_7.jpg" alt="" class="img-fluid">
-            </p>
-            <p>Molestiae cupiditate inventore animi, maxime sapiente optio, illo est nemo veritatis repellat sunt doloribus nesciunt! Minima laborum magni reiciendis qui voluptate quisquam voluptatem soluta illo eum ullam incidunt rem assumenda eveniet eaque sequi deleniti tenetur dolore amet fugit perspiciatis ipsa, odit. Nesciunt dolor minima esse vero ut ea, repudiandae suscipit!</p>
-            <h2 class="mb-3 mt-5">#2. Creative WordPress Themes</h2>
-            <p>Temporibus ad error suscipit exercitationem hic molestiae totam obcaecati rerum, eius aut, in. Exercitationem atque quidem tempora maiores ex architecto voluptatum aut officia doloremque. Error dolore voluptas, omnis molestias odio dignissimos culpa ex earum nisi consequatur quos odit quasi repellat qui officiis reiciendis incidunt hic non? Debitis commodi aut, adipisci.</p>
-            <p>
-              <img src="images/image_8.jpg" alt="" class="img-fluid">
-            </p>
-            <p>Quisquam esse aliquam fuga distinctio, quidem delectus veritatis reiciendis. Nihil explicabo quod, est eos ipsum. Unde aut non tenetur tempore, nisi culpa voluptate maiores officiis quis vel ab consectetur suscipit veritatis nulla quos quia aspernatur perferendis, libero sint. Error, velit, porro. Deserunt minus, quibusdam iste enim veniam, modi rem maiores.</p>
-            <p>Odit voluptatibus, eveniet vel nihil cum ullam dolores laborum, quo velit commodi rerum eum quidem pariatur! Quia fuga iste tenetur, ipsa vel nisi in dolorum consequatur, veritatis porro explicabo soluta commodi libero voluptatem similique id quidem? Blanditiis voluptates aperiam non magni. Reprehenderit nobis odit inventore, quia laboriosam harum excepturi ea.</p>
-            <p>Adipisci vero culpa, eius nobis soluta. Dolore, maxime ullam ipsam quidem, dolor distinctio similique asperiores voluptas enim, exercitationem ratione aut adipisci modi quod quibusdam iusto, voluptates beatae iure nemo itaque laborum. Consequuntur et pariatur totam fuga eligendi vero dolorum provident. Voluptatibus, veritatis. Beatae numquam nam ab voluptatibus culpa, tenetur recusandae!</p>
-            <p>Voluptas dolores dignissimos dolorum temporibus, autem aliquam ducimus at officia adipisci quasi nemo a perspiciatis provident magni laboriosam repudiandae iure iusto commodi debitis est blanditiis alias laborum sint dolore. Dolores, iure, reprehenderit. Error provident, pariatur cupiditate soluta doloremque aut ratione. Harum voluptates mollitia illo minus praesentium, rerum ipsa debitis, inventore?</p>
-            <div class="tag-widget post-tag-container mb-5 mt-5">
-              <div class="tagcloud">
-                <a href="#" class="tag-cloud-link">Life</a>
-                <a href="#" class="tag-cloud-link">Sport</a>
-                <a href="#" class="tag-cloud-link">Tech</a>
-                <a href="#" class="tag-cloud-link">Travel</a>
-              </div>
+            <h2 class="mb-2"><td><?php echo $title; ?></td> </h2>
+            <h5><?php echo $country; ?>, <?php echo $state;?>,<?php echo $city; ?></h5>
+            <p><?php echo $des; ?></p>
+
+           <form action="blog-single.php" enctype="multipart/form-data" method="post" style="border: 1px solid gray">
+           <div style="padding: 2%;">
+           <div class="row">
+            <div class="col-sm-6">
+              <label for="">Enter Your First Name</label>
+              <input type="text" class="form-control" name="first_name" id="first_name" placeholder="First Name..">
             </div>
-            
-            <div class="about-author d-flex p-4 bg-light">
-              <div class="bio mr-5">
-                <img src="images/person_1.jpg" alt="Image placeholder" class="img-fluid mb-4">
-              </div>
-              <div class="desc">
-                <h3>George Washington</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus voluptate quod mollitia delectus aut, sunt placeat nam vero culpa sapiente consectetur similique, inventore eos fugit cupiditate numquam!</p>
-              </div>
+            <div class="col-sm-6">
+              <label for="">Enter Your Last Name</label>
+              <input type="text" class="form-control" name="last_name" id="last_name" placeholder="Last Name..">
+            </div>
+           </div>
+            <div class="row">
+            <div class="col-sm-6">
+              <label for="">Enter Your DOB </label>
+              <input type="date" class="form-control" name="dob"  placeholder="Date of birth...">
+            </div>
+            <div class="col-sm-6">
+              <label for="">Upload Resume</label>
+              <input type="file" name="file" class="form-control" >
             </div>
 
+            </div>
+            <br>
+            
+              <input type="submit" name="submit" value="Apply" class=" mt-3 btn btn-primary btn-block">
+
+            
+        
+              </div>
+           </form>
+            
+            
+           
 
             <div class="pt-5 mt-5">
               <h3 class="mb-5">6 Comments</h3>
