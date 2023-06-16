@@ -40,7 +40,7 @@ if (isset($_SESSION['email'])==true) {
     
 	  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 	    <div class="container">
-	      <a class="navbar-brand" href="index.html">JobPortal</a>
+	      <a class="navbar-brand" href="index.php">JobPortal</a>
 	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="oi oi-menu"></span> Menu
 	      </button>
@@ -83,6 +83,7 @@ $des=$row['des'];
 $country=$row['country'];
 $state=$row['state'];
 $city=$row['city'];
+$id_job=$row['job_id'];
 }
 
 
@@ -108,8 +109,10 @@ $city=$row['city'];
             <h5><?php echo $country; ?>, <?php echo $state;?>,<?php echo $city; ?></h5>
             <p><?php echo $des; ?></p>
 
-           <form action="blog-single.php" enctype="multipart/form-data" method="post" style="border: 1px solid gray">
+           <form action="apply_job.php" id="JobPortal" enctype="multipart/form-data" method="post" style="border: 1px solid gray">
            <div style="padding: 2%;">
+           <input type="hidden" name="job_seeker" value="<?php echo $_SESSION['email'];?>" id="job_seeker">
+           <input type="hidden" name="id_job" value="<?php echo $id_job; ?>" id="id_job">
            <div class="row">
             <div class="col-sm-6">
               <label for="">Enter Your First Name</label>

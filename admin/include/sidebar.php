@@ -123,6 +123,12 @@ if (mysqli_num_rows($query)>0){
               Job Create
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="apply_jobs.php">
+              <span data-feather="bar-chart-2"></span>
+              Apply Jobs
+            </a>
+          </li>
           <!-- <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="layers"></span>
