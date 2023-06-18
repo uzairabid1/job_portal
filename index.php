@@ -1,5 +1,6 @@
 <?php
 session_start();
+error_reporting(0);
 include('admin/connection/db.php');
 $query=mysqli_query($conn,"select * from job_category");
 
@@ -33,12 +34,20 @@ $query=mysqli_query($conn,"select * from job_category");
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/style.css">
+    <style>
+  .active5 {
+    background-color: #157efb;
+    color: #fff;
+    padding: 5px -5px;
+    border-radius: 5px;
+  }
+</style>
   </head>
   <body>
     
 	  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 	    <div class="container">
-	      <a class="navbar-brand" href="index.html">JobPortal</a>
+	      <a class="navbar-brand" href="index.php">JobPortal</a>
 	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="oi oi-menu"></span> Menu
 	      </button>
@@ -52,19 +61,35 @@ $query=mysqli_query($conn,"select * from job_category");
             <?php
             if(isset($_SESSION['email'])==true){?>
               <li class="nav-item cta mr-md-2"><a href="job-post.php" class="nav-link"><?php echo $_SESSION['email']; ?></a></li>
-              <li class="nav-item cta cta-colored"><a href="logout.php" class="nav-link">logout</a></li>
-              <?php
+                          
+              <li class="nav-item">
+                <div class="dropdown">
+                <?php
+                include('connection/db.php');
+               $email = $_SESSION['email'];
+                $query=mysqli_query($conn,"select * from profiles where email='{$_SESSION['email']}'");
+                $total = mysqli_num_rows($query);                
+                if($total>0){ ?>
+                  <?php  while ($row=mysqli_fetch_array($query)){ ?>
+                    <img src="<?php echo "files/" . $row['img'] ?>" class="img-thumbnail" alt="Cinque Terre" width="50" height="50">  
+                   <?php } ?>
+               <?php } else { ?>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Circle-icons-profile.svg/2048px-Circle-icons-profile.svg.png" class="img-circle dropdown-toggle" type="button" data-toggle="dropdwown" width="50" height="50" alt="">
+              <?php } ?>
+                  <ul class="dropdown-menu">
+                    <li><a href="my_profile.php">My Profile</a></li>
+                    <li><a href="logout.php">Logout</a></li>
+                  </ul>
+                </div>
+              </li>
+              <?php 
             }else{
               ?>
               <li class="nav-item cta mr-md-2"><a href="job-post.php" class="nav-link">Login</a></li>
-	          
-
-
-             <?php
+             
+               <?php
             }
-
-            ?>
-	          
+            ?>	          
 
 	        </ul>
 	      </div>
@@ -113,6 +138,8 @@ $query=mysqli_query($conn,"select * from job_category");
 						                      <select name="category" id="category" class="form-control">
                                   <option hidden value="">Category</option>
 						                      <?php
+                                  include('connection/db.php');                                  
+                                   $query=mysqli_query($conn,"select * from job_category");
                                     while($row=mysqli_fetch_array($query)){ ?>
                                      <option value="<?php echo $row['id']; ?>"><?php echo $row['category'];?></option>
                                   <?php  } ?>
@@ -187,14 +214,48 @@ $query=mysqli_query($conn,"select * from job_category");
         </div>
       </div>
     </div>
-<?php
+    <?php
 include('connection/db.php');
 
-if(isset($_POST['search'])){
-$keyword=$_POST['key'];
-$category=$_POST['category'];
-$sql1="select * FROM all_jobs LEFT JOIN company ON all_jobs.customer_email=company.admin WHERE keyword LIKE '%$keyword%' OR category='$category' ";
-$query=mysqli_query($conn,$sql1 );
+if (isset($_POST['search']) || isset($_GET['page'])) {
+  $page = isset($_GET['page']) ? $_GET['page'] : 1;
+  $keyword = isset($_POST['key']) ? $_POST['key'] : '';
+  $category = isset($_POST['category']) ? $_POST['category'] : '';
+
+  $perPage = 3;
+  $page1 = ($page - 1) * $perPage;
+
+  $whereClause = '';
+  if (!empty($keyword)) {
+    $whereClause = "WHERE keyword LIKE '%$keyword%'";
+  }
+  if (!empty($category)) {
+    $whereClause .= !empty($whereClause) ? " AND category = '$category'" : "WHERE category = '$category'";
+  }
+
+  $sql1 = "SELECT * FROM all_jobs LEFT JOIN company ON all_jobs.customer_email = company.admin $whereClause LIMIT $page1, $perPage";
+  $query = mysqli_query($conn, $sql1);
+  $error = mysqli_num_rows($query);
+
+  // Calculate the total count for the given search criteria
+  $sqlCount = "SELECT COUNT(*) AS count FROM all_jobs LEFT JOIN company ON all_jobs.customer_email = company.admin $whereClause";
+  $resultCount = mysqli_query($conn, $sqlCount);
+  $rowCount = mysqli_fetch_assoc($resultCount);
+  $totalCount = $rowCount['count'];
+} else {
+  $page = 1;
+  $perPage = 3;
+  $page1 = 0;
+
+  $sql1 = "SELECT * FROM all_jobs LEFT JOIN company ON all_jobs.customer_email = company.admin LIMIT $page1, $perPage";
+  $query = mysqli_query($conn, $sql1);
+  $error = mysqli_num_rows($query);
+
+  // Calculate the total count for all jobs
+  $sqlCount = "SELECT COUNT(*) AS count FROM all_jobs";
+  $resultCount = mysqli_query($conn, $sqlCount);
+  $rowCount = mysqli_fetch_assoc($resultCount);
+  $totalCount = $rowCount['count'];
 }
 ?>
 <div id="id_all_jobs">
@@ -204,6 +265,12 @@ $query=mysqli_query($conn,$sql1 );
           <div class="col-md-7 heading-section text-center ftco-animate">
           	<span class="subheading">Recently Added Jobs</span>
             <h2 class="mb-4"><span>Recent</span> Jobs</h2>
+            <br> <br>
+            <h3><?php             
+            if($error=="" || $error==NULL){
+                echo "No results :(";
+            }
+            ?></h3>
           </div>
         </div>
         <div class="row">
@@ -254,20 +321,48 @@ $query=mysqli_query($conn,$sql1 );
 				<div class="row mt-5">
           <div class="col text-center">
             <div class="block-27">
-              <ul>
-                <li><a href="#">&lt;</a></li>
-                <li class="active"><span>1</span></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li><a href="#">&gt;</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-			</div>
-		</section>
+            <ul>
+            <?php if ($page > 1) { ?>
+              <li><a href="index.php?page=<?php echo ($page - 1) . $queryString; ?>">&lt;</a></li>
+            <?php } ?>
+
+            <?php
+            $a = ceil($totalCount / $perPage);
+
+            if ($a > 0) {
+              $queryString = '';
+              if (!empty($keyword)) {
+                $queryString .= "&keyword=$keyword";
+              }
+              if (!empty($category)) {
+                $queryString .= "&category=$category";
+              }
+
+              for ($b = 1; $b <= $a; $b++) {
+                $activeClass = ($page == $b) ? 'active5' : '';
+                ?>
+                <li><a href="index.php?page=<?php echo $b . $queryString; ?>" class="<?php echo $activeClass; ?>"><?php echo $b; ?></a></li>
+              <?php
+              }
+            }
+            ?>
+
+            <?php if ($page < $a) { ?>
+              <li><a href="index.php?page=<?php echo ($page + 1) . $queryString; ?>">&gt;</a></li>
+            <?php } ?>
+          </ul>
+
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+
+            
+
+        
 
     <section class="ftco-section services-section bg-light">
       <div class="container">

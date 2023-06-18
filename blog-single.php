@@ -129,9 +129,19 @@ $id_job=$row['job_id'];
               <input type="date" class="form-control" name="dob"  placeholder="Date of birth...">
             </div>
             <div class="col-sm-6">
-              <label for="">Upload Resume</label>
+              <label for="">Upload Your Resume</label>
               <input type="file" name="file" class="form-control" >
             </div>
+
+            <div class="col-sm-6">
+              <label for="">Enter Mobile Number</label>
+              <input type="text" class="form-control" name="mobile_number" id="mobile_number" placeholder="Contact Number..">
+            </div>
+            <div class="col-sm-6">
+              <label for="">Enter Your Email</label>
+              <input type="text" class="form-control disabled" disabled name="email" value="<?php echo $_SESSION['email'];?>" id="email" placeholder="Email..">
+            </div>
+           </div>
 
             </div>
             <br>

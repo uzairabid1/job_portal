@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
   <head>
@@ -151,49 +150,38 @@ body {
 
       <main role="main" class="inner cover">
         <h1 class="cover-heading">Cover your page.</h1>
-        <?php
-include('connection/db.php');
-if(isset($_POST['submit'])){
+<?php
+ include('connection/db.php');
+ $name=$_POST['name'];
+ $dob=$_POST['dob'];
+ $mobile_number = $_POST['mobile_number'];
+ $email = $_POST['email'];
+ $file_name = $_FILES['file']['name'];
+ $file_tmp_name = $_FILES['file']['tmp_name'];
  
-    $first_name=$_POST['first_name'];
-    $last_name=$_POST['last_name'];
-    $dob=$_POST['dob'];
-    $file_name = $_FILES['file']['name'];
-    $mobile_number = $_POST['mobile_number'];
+ $flag = false;
+ $destination_directory = 'files/';  
+ $destination_path = $destination_directory . $file_name;
+ if (move_uploaded_file($file_tmp_name, $destination_path)) {
+   $query = mysqli_query($conn, "insert into profiles (img,name,dob,number,email) VALUES ('$file_name', '$name', '$dob','$mobile_number', '$email')");
+   // File moved successfully, insert the file name into the database
+    $flag = true;
+  }
 
-    $file_tmp_name = $_FILES['file']['tmp_name'];
-    $id_job=$_POST['id_job'];
-    $job_seeker=$_POST['job_seeker'];
-    $destination_directory = 'files/';  
-$destination_path = $destination_directory . $file_name;
-$sql=mysqli_query($conn,"select * from job_apply where job_seeker='$job_seeker' and id_job='$id_job'");
-if(mysqli_num_rows($sql)>0){
-echo "<h1> Already applied </h1>";
-}else{
-  
+  if($flag){
+   echo "<div class='alert alert-success'>Data has been successfully inserted</div>";  ;
+  }
+  else{
+   echo "<div class='alert alert-danger'>Error occurred</div>";
 
-if (move_uploaded_file($file_tmp_name, $destination_path)) {
-    // File moved successfully, insert the file name into the database
-    $query = mysqli_query($conn, "insert into job_apply (first_name,last_name,dob,file,id_job,job_seeker,mobile_number) VALUES ('$first_name', '$last_name', '$dob', '$file_name', '$id_job', '$job_seeker','$mobile_number')");
-    if ($query) { ?>
-    <p class="lead">Thank you for applying we will contact you soon!</p>
+  }
 
-<?php        
-    } else {
-        echo "Not Inserted";
-    }
-} else {
-    echo "File upload failed.";
-}
-}
-}
+
+   
 
 ?>
-
-        
-        
       
-        <p class="lead">
+      <p class="lead">
           <a href="http://localhost:8080/job_portal" class="btn btn-lg btn-secondary">Back</a>
         </p>
       </main>

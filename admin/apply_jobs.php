@@ -20,7 +20,7 @@ include('include/sidebar.php');
               <div class="btn-group mr-2">
                
               </div>
-              <a class="btn btn-primary" href="add_create_job.php">Apply Jobs</a>
+              
             </div>
           </div>
           <table id="example" class="display" style="width:100%">
@@ -29,11 +29,11 @@ include('include/sidebar.php');
                 <th>#SL</th>
               
                 <th>Job Title</th>
-                <th>Description</th>
+     
                 
                 <th>Job Seeker Name</th>
                 <th>Job seeker email</th>
-                <th>Job seekers resume</th>  
+                <!-- <th>Job seekers resume</th>   -->
                 <th>Actions</th>  
             </tr>
         </thead>
@@ -50,18 +50,15 @@ while($row=mysqli_fetch_array($query)){
                 <td><?php echo $row['job_id'];?></td>
                 
                 <td><?php echo $row['job_title'];?></td>
-                <td><?php echo $row['des'];?></td>
+            
                 <td><?php echo $row['first_name'];?></td>
                 <td><?php echo $row['job_seeker'];?></td>
-                <td><a href="http://localhost:8080/job_portal/files/<?php echo $row['file'];?>">Download file</td>
+                <!-- <td><a href="http://localhost:8080/job_portal/files/<?php echo $row['file'];?>">Download file</td> -->
              
                 <td>
                   <div class="row">
                   <div class="btn-group">
-                    <a href="job_edit.php?edit=<?php echo $row['job_id']; ?>" class="btn btn-success"><span class="glyphicon glyphicon-pencil
-"></span></a>
-                    <a href="job_delete.php?del=<?php echo $row['job_id']; ?>" class="btn btn-danger"><span class="glyphicon glyphicon-trash
-"></span></a>
+                    <a href="view_applied_jobs.php?id=<?php echo $row['id']; ?>" class="btn btn-success"><span class="glyphicon glyphicon-eye-open"></span></a>                   
 
                   </div>
                   </div>
@@ -76,11 +73,11 @@ while($row=mysqli_fetch_array($query)){
                 <th>#SL</th>
               
                 <th>Job Title</th>
-                <th>Description</th>
+                
                 
                 <th>Job Seeker Name</th>
                 <th>Job seeker email</th>
-                <th>Job seekers resume</th>  
+                <!-- <th>Job seekers resume</th>   -->
                 <th>Actions</th>  
             </tr>
         </tfoot>
