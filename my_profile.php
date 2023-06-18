@@ -98,7 +98,7 @@ include('include/footer.php')
 ?>  
 
 
-<script>
+<!-- <script>
 
 $(document).ready(function(){
     $("#submit").click(function(){
@@ -114,4 +114,4 @@ $(document).ready(function(){
     })
 })
 
-</script>
+</script> -->

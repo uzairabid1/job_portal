@@ -62,8 +62,8 @@ include('include/sidebar.php');
                 </div>
                                   
             <?php } ?>
-            <a class="btn btn-success" href="#">Accept</a>
-            <a class="btn btn-danger" href="#">Reject</a>
+            <a class="btn btn-success" href="send_mail.php?id=<?php echo $id; ?>">Accept</a>
+            <a class="btn btn-danger" href="reject_job.php?id=<?php echo $id; ?>">Reject</a>
             
     </form>
           <!-- <canvas class="my-4" id="myChart" width="900" height="380"></canvas> -->

@@ -1,5 +1,7 @@
 <?php 
 include('include/header.php');
+$page='about';
+
 ?>
 
     <section class="ftco-about d-md-flex">

@@ -1,3 +1,6 @@
+<?php 
+session_start();
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -162,6 +165,20 @@ body {
  $flag = false;
  $destination_directory = 'files/';  
  $destination_path = $destination_directory . $file_name;
+$sql=mysqli_query($conn,"select * from profiles where email='{$_SESSION['email']}'");
+$sql_check=mysqli_num_rows($sql);
+if(!empty($sql_check)){
+  $query=mysqli_query($conn,"update profiles set img='$file_name',name='$name',dob='$dob',number='$mobile_number',email='$email' where email='{$_SESSION['email']}'");
+  if($query){
+    echo "<div class='alert alert-success'>Your Profile has been updated</div>";
+    move_uploaded_file($file_tmp_name, $destination_path);
+  }
+  else{
+    echo "<div class='alert alert-danger'>Error occurred</div>";
+  }
+}
+else{
+
  if (move_uploaded_file($file_tmp_name, $destination_path)) {
    $query = mysqli_query($conn, "insert into profiles (img,name,dob,number,email) VALUES ('$file_name', '$name', '$dob','$mobile_number', '$email')");
    // File moved successfully, insert the file name into the database
@@ -176,7 +193,7 @@ body {
 
   }
 
-
+}
    
 
 ?>

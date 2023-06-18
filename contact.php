@@ -1,5 +1,6 @@
 <?php 
 include('include/header.php');
+$page='contact';
 ?>
 
     <section class="ftco-section contact-section bg-light">
