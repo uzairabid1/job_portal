@@ -15,10 +15,10 @@ include('include/my_profile.php');
                 $total = mysqli_num_rows($query);                
                 if($total>0){ ?>
                   <?php  while ($row=mysqli_fetch_array($query)){ ?>
-                    <img src="<?php echo "files/" . $row['img'] ?>" class="img-thumbnail" alt="Cinque Terre">  
+                    <img src="<?php echo "files/" . $row['img'] ?>" class="img-thumbnail" width="200" height="200">  
                    <?php } ?>
                <?php } else { ?>
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Circle-icons-profile.svg/2048px-Circle-icons-profile.svg.png" class="img-circle dropdown-toggle" type="button" data-toggle="dropdwown"alt="">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Circle-icons-profile.svg/2048px-Circle-icons-profile.svg.png" class="img-circle dropdown-toggle" type="button" data-toggle="dropdwown"alt="" width="200" height="200">
               <?php } ?>
         </div>
         <div class="col-md-6">
@@ -57,7 +57,7 @@ include('include/my_profile.php');
             <td>Enter Your Email:</td>
         </div>
         <div class="col-md-6">
-            <td><input type="text" name="email" id="email" value="<?php echo $_SESSION['email'] ?>" disabled placeholder="Enter Your Email..." class="form-group"></td>
+            <td><input type="text" name="email" id="email" value="<?php echo $_SESSION['email'] ?>"  placeholder="Enter Your Email..." class="form-group"></td>
         </div>       
     </div>
 </div>

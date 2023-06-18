@@ -35,13 +35,13 @@ $query=mysqli_query($conn,"select * from job_category");
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/style.css">
     <style>
-  .active5 {
-    background-color: #157efb;
-    color: #fff;
-    padding: 5px -5px;
-    border-radius: 5px;
-  }
-</style>
+      .pagination-active{
+        background-color: #157efb !important;
+        
+      }
+    </style>
+
+
   </head>
   <body>
     
@@ -339,9 +339,9 @@ if (isset($_POST['search']) || isset($_GET['page'])) {
               }
 
               for ($b = 1; $b <= $a; $b++) {
-                $activeClass = ($page == $b) ? 'active5' : '';
+                $activeClass = ($page == $b) ? 'pagination-active' : '';
                 ?>
-                <li><a href="index.php?page=<?php echo $b . $queryString; ?>" class="<?php echo $activeClass; ?>"><?php echo $b; ?></a></li>
+                <li><a href="index.php?page=<?php echo $b . $queryString; ?>" class="<?php echo $activeClass ?>"><?php echo $b; ?></a></li>
               <?php
               }
             }
