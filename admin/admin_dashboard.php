@@ -1,4 +1,11 @@
 <?php
+// session_start();
+
+
+// if (!isset($_SESSION['email'])) {
+//     header('location: admin_login.php');
+//     exit; 
+// }
   include('include/header.php');
   include('include/sidebar.php');
 ?>
